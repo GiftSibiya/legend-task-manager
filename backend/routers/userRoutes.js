@@ -24,13 +24,4 @@ router.post("/register", async (req, res) => {
   res.send(user);
 });
 
-router.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
-
-router.post("/submit", (req, res) => {
-  const data = req.body;
-  res.json({ message: `Data received successfully ${data} ` });
-});
-
 module.exports = router;
