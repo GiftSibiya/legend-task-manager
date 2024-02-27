@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const express = require("express");
 const router = express.Router();
 
+/// REGISTRATION ROUTES ///
 router.post("/register", async (req, res) => {
   const password = req.body.password;
   let user = await User.findOne({ email: req.body.email });
@@ -22,6 +23,18 @@ router.post("/register", async (req, res) => {
   }).save();
 
   res.send(user);
+});
+/// LOGIN SECTION ///
+router.post("/Login", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (user) {
+    if (bcrypt.compare(req.body.password, user.password)) {
+      res.send({
+        _id: user._id,
+        name: user.name,
+      });
+    }
+  }
 });
 
 module.exports = router;
