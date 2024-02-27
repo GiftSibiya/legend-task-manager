@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const history = useNavigate();
@@ -11,68 +10,57 @@ function Login() {
 
   async function submit(e) {
     e.preventDefault();
+
     try {
       await axios
-        .post("http://localhost:4000/Login", {
+        .post("http://localhost:8000/", {
           email,
           password,
         })
         .then((res) => {
-          if ((res.user = "This email is already in use")) {
-            history("/home");
+          if (res.data == "exist") {
+            history("/home", { state: { id: email } });
+          } else if (res.data == "notexist") {
+            alert("User have not sign up");
           }
+        })
+        .catch((e) => {
+          alert("wrong details");
+          console.log(e);
         });
-    } catch (error) {
+    } catch (e) {
       console.log(e);
     }
   }
 
   return (
-    <>
-      <div className="login--con">
-        <div className="login--box">
-          {/* TOP TEXT BOX */}
+    <div className="login">
+      <h1>Login</h1>
 
-          <div className="login--text">
-            <div className="login--text__h">Login</div>
-            <div className="login--text__p">
-              Enter your email to login to your account
-            </div>
-          </div>
+      <form action="POST">
+        <input
+          type="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          placeholder="Password"
+        />
+        <input type="submit" onClick={submit} />
+      </form>
 
-          {/* -- */}
+      <br />
+      <p>OR</p>
+      <br />
 
-          {/* INPUT FIELDS */}
-
-          <form action="POST">
-            <input
-              type="email"
-              className="login--input__email"
-              placeholder="m@example.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            ></input>
-            <input
-              type="password"
-              className="login--input__email"
-              placeholder="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            ></input>
-            <input type="submit" onClick={submit} />
-          </form>
-          <br />
-          <p>OR</p>
-          <br />
-          <Link to={"/SignUp"}>SignUp Page</Link>
-          {/* BUTTONS */}
-        </div>
-      </div>
-    </>
+      <Link to="/signup">Signup Page</Link>
+    </div>
   );
 }
 

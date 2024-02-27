@@ -1,31 +1,51 @@
-// Importing dependencies
-const mongoose = require("mongoose");
 const express = require("express");
+const collection = require("./mongoDb");
 const cors = require("cors");
-const routes = require("./routers/userRoutes.js");
-require("dotenv").config();
-
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-// Connect to MongoDB
-async function connectToDb() {
+app.get("/", cors(), (req, res) => {});
+
+app.post("/", async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    await mongoose.connect(process.env.DB_URL);
-    console.log("Connected to mongo");
-  } catch (err) {
-    console.log(err);
+    const check = await collection.findOne({ email: email });
+
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("notexist");
+    }
+  } catch (e) {
+    res.json("fail");
   }
-}
+});
 
-// Use the routes
-app.use("/", routes);
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
 
-connectToDb();
+  const data = {
+    email: email,
+    password: password,
+  };
 
-// Start our server:
+  try {
+    const check = await collection.findOne({ email: email });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on port ${process.env.PORT}`);
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("notexist");
+      await collection.insertMany([data]);
+    }
+  } catch (e) {
+    res.json("fail");
+  }
+});
+
+app.listen(8000, () => {
+  console.log("port connected");
 });

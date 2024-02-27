@@ -14,27 +14,28 @@ router.post("/register", async (req, res) => {
     return res.status(400).send("Invalid password");
   }
 
-  if (user) return res.send("This email is already in use");
-
-  user = await new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: await bcrypt.hash(req.body.password, 10),
-  }).save();
-
-  res.send(user);
+  if (user) {
+    return res.send("RegEmailExist");
+  } else {
+    // Note: Change this to "newUser" (previously "new User")
+    return res.send("newUser");
+  }
 });
 /// LOGIN SECTION ///
 router.post("/Login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) {
+    // Note: Change this to res.json({ user: "exists" })
+    res.json({ user: "exists" });
     if (bcrypt.compare(req.body.password, user.password)) {
-      res.send({
+      return res.send({
         _id: user._id,
         name: user.name,
       });
     }
+  } else {
+    // Note: Change this to res.json({ user: "notexist" })
+    res.json({ user: "notexist" });
   }
 });
-
 module.exports = router;

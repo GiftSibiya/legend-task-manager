@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import "./Signup.css";
+import { useNavigate, Link } from "react-router-dom";
 
-function Signup() {
+function Login() {
   const history = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -11,63 +10,58 @@ function Signup() {
 
   async function submit(e) {
     e.preventDefault();
+
     try {
-      await axios.post("http://localhost:4000/register", {
-        email,
-        password,
-      });
-    } catch (error) {
+      await axios
+        .post("http://localhost:8000/signup", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.data == "exist") {
+            alert("User already exists");
+          } else if (res.data == "notexist") {
+            history("/home", { state: { id: email } });
+          }
+        })
+        .catch((e) => {
+          alert("wrong details");
+          console.log(e);
+        });
+    } catch (e) {
       console.log(e);
     }
   }
 
   return (
-    <>
-      <div className="login--con">
-        <div className="login--box">
-          {/* TOP TEXT BOX */}
+    <div className="login">
+      <h1>Signup</h1>
 
-          <div className="login--text">
-            <div className="login--text__h">Login</div>
-            <div className="login--text__p">
-              Enter your email to login to your account
-            </div>
-          </div>
+      <form action="POST">
+        <input
+          type="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          placeholder="Password"
+        />
+        <input type="submit" onClick={submit} />
+      </form>
 
-          {/* -- */}
+      <br />
+      <p>OR</p>
+      <br />
 
-          {/* INPUT FIELDS */}
-
-          <form action="POST">
-            <input
-              type="email"
-              className="login--input__email"
-              placeholder="m@example.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            ></input>
-            <input
-              type="password"
-              className="login--input__email"
-              placeholder="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            ></input>
-            <input type="submit" onClick={submit} />
-          </form>
-          <br />
-          <p>OR</p>
-          <br />
-          <Link to={"/"}>Login Page</Link>
-          {/* BUTTONS */}
-        </div>
-      </div>
-    </>
+      <Link to="/">Login Page</Link>
+    </div>
   );
 }
 
-export default Signup;
+export default Login;

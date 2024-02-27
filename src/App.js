@@ -1,20 +1,21 @@
-// App.js
-
-import React from "react";
-import Login from "./screens/auth/login/Login";
+// import './App.css'
+import Home from "../src/screens/home/Home.jsx";
+import Login from "../src/screens/auth/login/Login";
+import Signup from "../src/screens/auth/signUp/Signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from "./screens/auth/signUp/Signup";
-import Home from "./screens/home/Home";
+import { useState } from "react";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/SignUp" element={<Signup />} />
-        <Route path="/Home" element={<Home />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
