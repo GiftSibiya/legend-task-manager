@@ -1,18 +1,24 @@
+/// IMPORTS ///
+
 const User = require("../models/Users.js");
 const bcrypt = require("bcryptjs");
 const express = require("express");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  // Check if required fields are present in the request body
-  if (!req.body.name || !req.body.email || !req.body.password) {
-    return res.status(400).send("Missing required fields");
+  const password = req.body.password;
+  let user = await User.findOne({ email: req.body.email });
+
+  if (!password || typeof password !== "string") {
+    return res.status(400).send("Invalid password");
   }
 
-  const user = await new User({
+  if (user) return res.send("This email is already in use");
+
+  user = await new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: await bcrypt.hash(req.body.password, 10),
   }).save();
 
   res.send(user);
