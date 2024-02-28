@@ -4,11 +4,11 @@ import "./Task.css";
 function Task({ task }) {
   return (
     <div className="Task--text">
-      <p className="table-sm">{task.taskName}</p>
-      <p className="table-lg">{task.taskDesc}</p>
-      <p className="table-sm">{task.taskStatus}</p>
-      <p className="table-sm">{task.taskDue}</p>
-      <button> more </button>
+      <p className="table-s">{task.taskName}</p>
+      <p className="table-l">{task.taskDesc}</p>
+      <p className="table-s">{task.taskStatus}</p>
+      <p className="table-s">{new Date(task.taskDue).toLocaleDateString()}</p>
+      <button className="table-btn"> </button>
     </div>
   );
 }

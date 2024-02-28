@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Home.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import Task from "../../components/task/Task";
+import MatTable from "../../components/table/MatTable";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -23,9 +24,11 @@ function Home() {
       console.error("Error fetching tasks:", error);
     }
   };
+
   const navigateToAddTask = () => {
     navigate("/add"); // Navigate to the "/add" route
   };
+
   return (
     <div className="homepage">
       <h1 className="home--h1">
@@ -33,27 +36,18 @@ function Home() {
       </h1>
       <div className="task--con">
         <div className="task--con__heading">
-          <h5 className="task--con__"> Tasks</h5>
-          <button onClick={navigateToAddTask}>Add Task</button>
+          <button className="task--con__btn" onClick={navigateToAddTask}>
+            Add Task
+          </button>
         </div>
 
         {/* NEW TASK */}
 
         {/* -- */}
         <div className="task--con__box">
-          <div className="task--table">
-            <p className="table-sm"> Task Name</p>
-            <p className="table-lg">Description</p>
-            <p className="table-sm">Status</p>
-            <p className="table-sm">Due Date</p>
-            <p className="table-sm">Actions</p>
-          </div>
           {/* TASKS */}
+          <MatTable tasks={tasks} />
 
-          {/* Render Task component for each task */}
-          {tasks.map((task) => (
-            <Task key={task._id} task={task} />
-          ))}
           {/* -- */}
         </div>
       </div>

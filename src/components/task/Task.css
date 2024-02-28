@@ -1,3 +1,26 @@
 .Task--text {
-  display: fle;
+  display: flex;
+  color: black;
+  align-items: center;
+  padding: 10px;
+}
+.table-s {
+  flex: 1;
+  width: 5px;
+  color: black;
+  font-size: 0.7rem;
+  text-wrap: balance;
+  font-weight: bold;
+}
+.table-l {
+  padding-left: 10px;
+  flex: 3;
+  font-weight: bold;
+  color: black;
+  font-size: 0.8rem;
+}
+.table-btn {
+  height: 30px;
+  width: 50px;
+  margin: 10px 15px;
 }

@@ -73,24 +73,3 @@
   color: gray;
   font-size: 0.8rem;
 }
-
-.task--new__left {
-  height: 100%;
-  width: 50%;
-}
-.form--new {
-  border: 2px solid grey;
-  display: flex;
-  width: 100%;
-}
-.new--name {
-  height: 40%;
-}
-.new--Desc {
-  height: 55%;
-}
-
-.task--new__right {
-  height: 100%;
-  width: 50%;
-}

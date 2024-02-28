@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./AddTask.css";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -40,13 +41,13 @@ function AddTask() {
       <form action="Post" className="form--new">
         <div className="task--new__left">
           <div className="new--name">
-            <p>Task name</p>
+            <p className="task--p">Task name</p>
             <input
               placeholder="Enter Task Name"
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
             />
-            <p>Task Description</p>
+            <p className="task--p">Task Description</p>
             <textarea
               placeholder="Enter Task Description"
               value={taskDesc}
@@ -60,22 +61,23 @@ function AddTask() {
         {/* RIGHT */}
         <div className="task--new__right">
           {/* STATUS */}
-          <label htmlFor="status">Choose Status:</label>
-          <select
-            id="status"
-            name="status"
-            value={taskStatus}
-            onChange={(e) => setTaskStatus(e.target.value)}
-          >
-            <option value="In Progress">In Progress</option>
-            <option value="Pending">Pending</option>
-            <option value="Completed">Completed</option>
-          </select>
+          <div className="task--status">
+            <p className="task--p">Choose Status</p>
+            <select
+              id="status"
+              name="status"
+              value={taskStatus}
+              onChange={(e) => setTaskStatus(e.target.value)}
+            >
+              <option value="In Progress">In Progress</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
           {/* -- */}
-
           {/* DUE DATE */}
           <div className="input--date">
-            <label htmlFor="dueDate">Choose Due Date:</label>
+            <p>Choose Due Date:</p>
             <input
               type="date"
               id="dueDate"
@@ -84,7 +86,11 @@ function AddTask() {
               onChange={(e) => setTaskDue(e.target.value)}
             />
           </div>
-          <input type="submit" onClick={handleAddTask} />
+          <input
+            type="submit"
+            onClick={handleAddTask}
+            className="input--submit"
+          />
 
           {/* -- */}
         </div>

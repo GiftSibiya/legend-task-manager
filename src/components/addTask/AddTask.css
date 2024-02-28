@@ -1,0 +1,48 @@
+.task--new {
+  height: 500px;
+  width: 95vw;
+}
+.task--p {
+  color: white;
+}
+.form--new {
+  border: 2px solid grey;
+  margin: 20px;
+  display: flex;
+  height: 250px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(57, 57, 70);
+}
+.new--name {
+  height: 40%;
+}
+.new--Desc {
+  height: 55%;
+}
+.input--date {
+}
+.input--submit {
+  margin: 10px 0px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 10px;
+}
+
+.task--new__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+.task--status {
+}
+.task--new__left {
+  height: 100%;
+  width: 50%;
+}
