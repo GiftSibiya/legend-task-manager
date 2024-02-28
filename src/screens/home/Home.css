@@ -1,9 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .homepage {
   display: flex;
   height: 90vh;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding-bottom: 400px;
+}
+.home--h1 {
+  width: 70vw;
+  text-align: center;
 }
 .task--con {
   display: flex;
@@ -14,15 +26,30 @@
   border: 1px solid grey;
 }
 .task--con__heading {
+  align-self: flex-start;
   display: flex;
+  align-items: center;
+  margin-left: 40px;
   flex-direction: row;
+}
+.task--con__p {
+  font-weight: bold;
+  font-size: 20px;
+}
+.task--con__btn {
+  height: 40px;
+  width: 100px;
+  color: white;
+  background-color: rgb(44, 44, 44);
+  border-radius: 10px;
+  border: none;
+  margin: 0px 10px;
 }
 
 .task--new {
   display: flex;
   height: 800px;
   width: 90%;
-  border: 2px solid red;
 }
 .task--con__box {
   width: 90%;
@@ -35,31 +62,35 @@
 }
 .table-sm {
   flex: 1;
+  color: gray;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 .table-lg {
+  padding-left: 10px;
   flex: 3;
+  font-weight: bold;
+  color: gray;
+  font-size: 0.8rem;
 }
+
 .task--new__left {
-  border: 2px solid red;
   height: 100%;
   width: 50%;
 }
 .form--new {
+  border: 2px solid grey;
   display: flex;
   width: 100%;
-  border: 1px solid blue;
 }
 .new--name {
-  border: 1px solid blue;
   height: 40%;
 }
 .new--Desc {
-  border: 1px solid blue;
   height: 55%;
 }
 
 .task--new__right {
-  border: 2px solid red;
   height: 100%;
   width: 50%;
 }

@@ -4,6 +4,7 @@ import Login from "../src/screens/auth/login/Login";
 import Signup from "../src/screens/auth/signUp/Signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import AddTask from "./components/addTask/AddTask.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/add" element={<AddTask />} />
         </Routes>
       </Router>
     </div>
