@@ -71,6 +71,16 @@ app.post("/home", async (req, res) => {
   }
 });
 
+app.get("/home", async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.json(tasks);
+  } catch (error) {
+    console.error("Error fetching tasks", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(8000, () => {
   console.log("port connected");
 });

@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Home.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import Task from "../../components/task/Task";
 
 function Home() {
+  const [tasks, setTasks] = useState([]);
   const [taskName, setTaskName] = useState("");
   const [taskDesc, setTaskDesc] = useState("");
   const [taskStatus, setTaskStatus] = useState("");
   const [taskDue, setTaskDue] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch tasks from the server when the component mounts
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/home");
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
 
   const handleAddTask = async (e) => {
     e.preventDefault();
@@ -114,7 +129,13 @@ function Home() {
             <p className="table-sm">Due Date</p>
             <p className="table-sm">Actions</p>
           </div>
-          <Task />
+          {/* TASKS */}
+
+          {/* Render Task component for each task */}
+          {tasks.map((task) => (
+            <Task key={task._id} task={task} />
+          ))}
+          {/* -- */}
         </div>
       </div>
     </div>
