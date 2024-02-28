@@ -48,6 +48,28 @@ app.post("/signup", async (req, res) => {
     res.json("fail");
   }
 });
+// New route for adding tasks
+app.post("/home", async (req, res) => {
+  const { taskName, taskDesc, taskStatus, taskDue } = req.body;
+
+  try {
+    // Create a new task using the Task model
+    const newTask = await Task.create({
+      taskName,
+      taskDesc,
+      taskStatus,
+      taskDue,
+    });
+
+    console.log("Task added successfully:", newTask);
+
+    res.status(200).json({ message: "Task added successfully", task: newTask });
+  } catch (error) {
+    console.log(req.body);
+    console.error("Error adding task:", error);
+    res.status(500).json({ message: "Failed to add task" });
+  }
+});
 
 app.listen(8000, () => {
   console.log("port connected");

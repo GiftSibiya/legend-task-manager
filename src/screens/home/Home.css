@@ -1,0 +1,65 @@
+.homepage {
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.task--con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  height: 350px;
+  border: 1px solid grey;
+}
+.task--con__heading {
+  display: flex;
+  flex-direction: row;
+}
+
+.task--new {
+  display: flex;
+  height: 800px;
+  width: 90%;
+  border: 2px solid red;
+}
+.task--con__box {
+  width: 90%;
+  height: 80%;
+  border: 1px solid grey;
+}
+.task--table {
+  display: flex;
+  border: 1px solid grey;
+}
+.table-sm {
+  flex: 1;
+}
+.table-lg {
+  flex: 3;
+}
+.task--new__left {
+  border: 2px solid red;
+  height: 100%;
+  width: 50%;
+}
+.form--new {
+  display: flex;
+  width: 100%;
+  border: 1px solid blue;
+}
+.new--name {
+  border: 1px solid blue;
+  height: 40%;
+}
+.new--Desc {
+  border: 1px solid blue;
+  height: 55%;
+}
+
+.task--new__right {
+  border: 2px solid red;
+  height: 100%;
+  width: 50%;
+}

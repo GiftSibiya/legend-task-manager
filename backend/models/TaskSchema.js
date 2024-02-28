@@ -9,13 +9,13 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status: {
+  taskStatus: {
     type: String,
     enum: ["In Progress", "Pending", "Completed"],
   },
-  due: {
+  taskDue: {
     type: Date,
-    required: true,
+    required: false,
   },
 });
 
